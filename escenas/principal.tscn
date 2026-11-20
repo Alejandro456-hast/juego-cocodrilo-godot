@@ -1,0 +1,1000 @@
+[gd_scene format=3 uid="uid://dylsbyhkyb3aw"]
+
+[ext_resource type="Script" uid="uid://btnuxsxaghpqe" path="res://scripts/nucleo/gestor_juego.gd" id="1_gm"]
+[ext_resource type="PackedScene" uid="uid://bvx08ixpo80m4" path="res://escenas/maquina/maquina_cocodrilo.tscn" id="2_cm"]
+[ext_resource type="PackedScene" uid="uid://e0o4glf4o1yh" path="res://escenas/jugador/asiento_jugador.tscn" id="3_ps"]
+[ext_resource type="Script" uid="uid://cuhsv2ecf40er" path="res://scripts/sonido/efectos_sonido.gd" id="4_sfx"]
+[ext_resource type="Script" uid="uid://dybo77g4dkblx" path="res://scripts/jugador/controlador_ia.gd" id="5_ai"]
+[ext_resource type="Script" uid="uid://cq4h05fpryl21" path="res://scripts/ambiente/luz_habitacion.gd" id="6_rl"]
+[ext_resource type="Script" uid="uid://bntwhndo3mis5" path="res://scripts/ambiente/controlador_camara.gd" id="7_cam"]
+[ext_resource type="Script" uid="uid://q3qpckspxoew" path="res://scripts/interfaz/gestor_interfaz.gd" id="8_ui"]
+[ext_resource type="Script" uid="uid://dtk3ywf0rjsci" path="res://scripts/maquina/plato_giratorio.gd" id="9_pg"]
+[ext_resource type="Script" uid="uid://bkfxyxjvs4l2e" path="res://scripts/interfaz/panel_superior_hud.gd" id="10_hud"]
+[ext_resource type="Script" uid="uid://sij3cyh0uo56" path="res://scripts/interfaz/menu_inicio.gd" id="11_mi"]
+[ext_resource type="Script" uid="uid://iy012chqygj0" path="res://scripts/interfaz/menu_fin_partida.gd" id="12_mfp"]
+
+[sub_resource type="Environment" id="Environment_dark"]
+background_mode = 1
+background_color = Color(0.01, 0.01, 0.012, 1)
+ambient_light_source = 2
+ambient_light_color = Color(0.11, 0.08, 0.08, 1)
+ambient_light_energy = 0.35
+tonemap_mode = 2
+glow_enabled = true
+glow_intensity = 0.65
+volumetric_fog_enabled = true
+volumetric_fog_density = 0.025
+volumetric_fog_albedo = Color(0.14, 0.09, 0.09, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_floor"]
+albedo_color = Color(0.06, 0.05, 0.045, 1)
+roughness = 0.92
+
+[sub_resource type="BoxMesh" id="BoxMesh_floor"]
+size = Vector3(7.6, 0.1, 7.6)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_wall"]
+albedo_color = Color(0.11, 0.09, 0.08, 1)
+roughness = 0.95
+
+[sub_resource type="BoxMesh" id="BoxMesh_wall_ns"]
+size = Vector3(7.6, 3.6, 0.16)
+
+[sub_resource type="BoxMesh" id="BoxMesh_wall_ew"]
+size = Vector3(0.16, 3.6, 7.6)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_blood_wall"]
+albedo_color = Color(0.38, 0.02, 0.02, 1)
+metallic = 0.15
+roughness = 0.32
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_blood_splat"]
+top_radius = 0.55
+bottom_radius = 0.55
+height = 0.01
+
+[sub_resource type="BoxMesh" id="BoxMesh_blood_streak"]
+size = Vector3(0.14, 0.95, 0.015)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_poster_frame"]
+albedo_color = Color(0.12, 0.07, 0.05, 1)
+roughness = 0.85
+
+[sub_resource type="BoxMesh" id="BoxMesh_poster_frame"]
+size = Vector3(1.35, 0.92, 0.03)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_poster_paper"]
+albedo_color = Color(0.58, 0.5, 0.38, 1)
+roughness = 0.9
+
+[sub_resource type="BoxMesh" id="BoxMesh_poster_paper"]
+size = Vector3(1.22, 0.8, 0.04)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_bone"]
+albedo_color = Color(0.85, 0.8, 0.7, 1)
+roughness = 0.5
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_bone"]
+top_radius = 0.028
+bottom_radius = 0.028
+height = 0.14
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_flesh"]
+albedo_color = Color(0.56, 0.4, 0.34, 1)
+roughness = 0.78
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_thigh"]
+top_radius = 0.075
+bottom_radius = 0.095
+height = 0.42
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_calf"]
+top_radius = 0.055
+bottom_radius = 0.072
+height = 0.4
+
+[sub_resource type="BoxMesh" id="BoxMesh_foot"]
+size = Vector3(0.11, 0.07, 0.22)
+
+[sub_resource type="BoxMesh" id="BoxMesh_wall_hand"]
+size = Vector3(0.14, 0.18, 0.045)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_cord"]
+albedo_color = Color(0.06, 0.06, 0.06, 1)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_cord"]
+top_radius = 0.012
+bottom_radius = 0.012
+height = 1.25
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_shade"]
+top_radius = 0.06
+bottom_radius = 0.24
+height = 0.14
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_bulb"]
+albedo_color = Color(1, 0.88, 0.62, 1)
+emission_enabled = true
+emission = Color(1, 0.82, 0.5, 1)
+emission_energy_multiplier = 4.0
+
+[sub_resource type="SphereMesh" id="SphereMesh_bulb"]
+radius = 0.045
+height = 0.09
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_table"]
+albedo_color = Color(0.16, 0.1, 0.07, 1)
+roughness = 0.78
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_table_top"]
+top_radius = 1.48
+bottom_radius = 1.48
+height = 0.08
+radial_segments = 20
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_table_rim"]
+albedo_color = Color(0.1, 0.06, 0.04, 1)
+roughness = 0.85
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_table_leg"]
+top_radius = 0.28
+bottom_radius = 0.45
+height = 0.7
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_disc"]
+top_radius = 0.56
+bottom_radius = 0.6
+height = 0.02
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_barra_sup"]
+bg_color = Color(0.05, 0.04, 0.04, 0.88)
+border_width_bottom = 2
+border_color = Color(0.65, 0.16, 0.14, 0.9)
+corner_radius_bottom_right = 12
+corner_radius_bottom_left = 12
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_boton_hud"]
+bg_color = Color(0.16, 0.09, 0.09, 0.95)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.75, 0.25, 0.2, 0.8)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_barra_inf"]
+bg_color = Color(0.04, 0.03, 0.03, 0.86)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.55, 0.15, 0.12, 0.85)
+corner_radius_top_left = 14
+corner_radius_top_right = 14
+corner_radius_bottom_right = 14
+corner_radius_bottom_left = 14
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_menu_inicio"]
+bg_color = Color(0.06, 0.04, 0.04, 0.94)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0.78, 0.18, 0.15, 1)
+corner_radius_top_left = 18
+corner_radius_top_right = 18
+corner_radius_bottom_right = 18
+corner_radius_bottom_left = 18
+shadow_color = Color(0, 0, 0, 0.75)
+shadow_size = 24
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_boton_modo"]
+bg_color = Color(0.13, 0.1, 0.1, 0.95)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.45, 0.22, 0.2, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_boton_modo_hover"]
+bg_color = Color(0.24, 0.12, 0.12, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.95, 0.65, 0.25, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_boton_jugar"]
+bg_color = Color(0.68, 0.12, 0.1, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(1, 0.75, 0.35, 1)
+corner_radius_top_left = 12
+corner_radius_top_right = 12
+corner_radius_bottom_right = 12
+corner_radius_bottom_left = 12
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_boton_jugar_hover"]
+bg_color = Color(0.85, 0.18, 0.14, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(1, 0.88, 0.5, 1)
+corner_radius_top_left = 12
+corner_radius_top_right = 12
+corner_radius_bottom_right = 12
+corner_radius_bottom_left = 12
+
+[node name="Principal" type="Node3D" unique_id=170379841]
+script = ExtResource("1_gm")
+
+[node name="EntornoOscuro" type="WorldEnvironment" parent="." unique_id=1640048960]
+environment = SubResource("Environment_dark")
+
+[node name="Habitacion" type="Node3D" parent="." unique_id=1010219927]
+
+[node name="Suelo" type="MeshInstance3D" parent="Habitacion" unique_id=1932700294]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.05, 0)
+material_override = SubResource("StandardMaterial3D_floor")
+mesh = SubResource("BoxMesh_floor")
+
+[node name="Techo" type="MeshInstance3D" parent="Habitacion" unique_id=641331541]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.55, 0)
+material_override = SubResource("StandardMaterial3D_floor")
+mesh = SubResource("BoxMesh_floor")
+
+[node name="ParedesCuarto" type="Node3D" parent="Habitacion" unique_id=396118609]
+
+[node name="ParedNorte" type="MeshInstance3D" parent="Habitacion/ParedesCuarto" unique_id=875407101]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.75, -3.7)
+material_override = SubResource("StandardMaterial3D_wall")
+mesh = SubResource("BoxMesh_wall_ns")
+
+[node name="ParedSur" type="MeshInstance3D" parent="Habitacion/ParedesCuarto" unique_id=950470834]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.75, 3.7)
+material_override = SubResource("StandardMaterial3D_wall")
+mesh = SubResource("BoxMesh_wall_ns")
+
+[node name="ParedEste" type="MeshInstance3D" parent="Habitacion/ParedesCuarto" unique_id=1550958112]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.7, 1.75, 0)
+material_override = SubResource("StandardMaterial3D_wall")
+mesh = SubResource("BoxMesh_wall_ew")
+
+[node name="ParedOeste" type="MeshInstance3D" parent="Habitacion/ParedesCuarto" unique_id=426233108]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.7, 1.75, 0)
+material_override = SubResource("StandardMaterial3D_wall")
+mesh = SubResource("BoxMesh_wall_ew")
+
+[node name="ManchasSangreParedes" type="Node3D" parent="Habitacion" unique_id=1677058118]
+
+[node name="ManchaParedNorte_1" type="MeshInstance3D" parent="Habitacion/ManchasSangreParedes" unique_id=1797248173]
+transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, -1.55, 1.45, -3.61)
+material_override = SubResource("StandardMaterial3D_blood_wall")
+mesh = SubResource("CylinderMesh_blood_splat")
+
+[node name="ChorroSangreNorte_1" type="MeshInstance3D" parent="Habitacion/ManchasSangreParedes" unique_id=2053113415]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.55, 0.95, -3.6)
+material_override = SubResource("StandardMaterial3D_blood_wall")
+mesh = SubResource("BoxMesh_blood_streak")
+
+[node name="ManchaParedNorte_2" type="MeshInstance3D" parent="Habitacion/ManchasSangreParedes" unique_id=686836827]
+transform = Transform3D(0.8, 0, 0, 0, 0, -0.8, 0, 0.8, 0, 1.65, 1.55, -3.61)
+material_override = SubResource("StandardMaterial3D_blood_wall")
+mesh = SubResource("CylinderMesh_blood_splat")
+
+[node name="ManchaParedSur_1" type="MeshInstance3D" parent="Habitacion/ManchasSangreParedes" unique_id=2016780193]
+transform = Transform3D(0.9, 0, 0, 0, 0, 0.9, 0, -0.9, 0, 1.5, 1.35, 3.61)
+material_override = SubResource("StandardMaterial3D_blood_wall")
+mesh = SubResource("CylinderMesh_blood_splat")
+
+[node name="ManchaParedEste_1" type="MeshInstance3D" parent="Habitacion/ManchasSangreParedes" unique_id=1735587293]
+transform = Transform3D(0, 1, 0, 0, 0, 1, 1, 0, 0, 3.61, 1.4, -1.45)
+material_override = SubResource("StandardMaterial3D_blood_wall")
+mesh = SubResource("CylinderMesh_blood_splat")
+
+[node name="ManchaParedOeste_1" type="MeshInstance3D" parent="Habitacion/ManchasSangreParedes" unique_id=188609595]
+transform = Transform3D(0, -1, 0, 0, 0, 1, -1, 0, 0, -3.61, 1.45, 1.35)
+material_override = SubResource("StandardMaterial3D_blood_wall")
+mesh = SubResource("CylinderMesh_blood_splat")
+
+[node name="CharcoSangreSuelo_1" type="MeshInstance3D" parent="Habitacion/ManchasSangreParedes" unique_id=1233191485]
+transform = Transform3D(1.1, 0, 0, 0, 1, 0, 0, 0, 0.85, -2.5, 0.005, -2.5)
+material_override = SubResource("StandardMaterial3D_blood_wall")
+mesh = SubResource("CylinderMesh_blood_splat")
+
+[node name="CharcoSangreSuelo_2" type="MeshInstance3D" parent="Habitacion/ManchasSangreParedes" unique_id=2140036301]
+transform = Transform3D(0.95, 0, 0, 0, 1, 0, 0, 0, 1.15, 2.5, 0.005, -2.4)
+material_override = SubResource("StandardMaterial3D_blood_wall")
+mesh = SubResource("CylinderMesh_blood_splat")
+
+[node name="PostersMacabros" type="Node3D" parent="Habitacion" unique_id=99087001]
+
+[node name="PosterNorte" type="Node3D" parent="Habitacion/PostersMacabros" unique_id=2116888765]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.95, -3.6)
+
+[node name="MarcoPoster" type="MeshInstance3D" parent="Habitacion/PostersMacabros/PosterNorte" unique_id=876894770]
+material_override = SubResource("StandardMaterial3D_poster_frame")
+mesh = SubResource("BoxMesh_poster_frame")
+
+[node name="PapelPoster" type="MeshInstance3D" parent="Habitacion/PostersMacabros/PosterNorte" unique_id=1751078764]
+material_override = SubResource("StandardMaterial3D_poster_paper")
+mesh = SubResource("BoxMesh_poster_paper")
+
+[node name="TextoPoster" type="Label3D" parent="Habitacion/PostersMacabros/PosterNorte" unique_id=436708215]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.025)
+pixel_size = 0.0024
+modulate = Color(0.45, 0.04, 0.04, 1)
+outline_modulate = Color(0.08, 0.04, 0.04, 1)
+text = "REGLAS DEL CUARTO
+• 2 MANOS POR JUGADOR
+• EL QUE PIERDE LAS 2 CAE AL ABISMO"
+font_size = 28
+outline_size = 4
+
+[node name="PosterSur" type="Node3D" parent="Habitacion/PostersMacabros" unique_id=1643898921]
+transform = Transform3D(-1, 0, 0, 0, 1, 0, 0, 0, -1, 0, 1.95, 3.6)
+
+[node name="MarcoPoster" type="MeshInstance3D" parent="Habitacion/PostersMacabros/PosterSur" unique_id=340592025]
+material_override = SubResource("StandardMaterial3D_poster_frame")
+mesh = SubResource("BoxMesh_poster_frame")
+
+[node name="PapelPoster" type="MeshInstance3D" parent="Habitacion/PostersMacabros/PosterSur" unique_id=550658569]
+material_override = SubResource("StandardMaterial3D_poster_paper")
+mesh = SubResource("BoxMesh_poster_paper")
+
+[node name="TextoPoster" type="Label3D" parent="Habitacion/PostersMacabros/PosterSur" unique_id=625006470]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.025)
+pixel_size = 0.0024
+modulate = Color(0.45, 0.04, 0.04, 1)
+outline_modulate = Color(0.08, 0.04, 0.04, 1)
+text = "LA MÁQUINA NO PERDONA
+• 20 BOTONES EN LA LENGUA
+• AL MORDER SE REACTIVAN +4"
+font_size = 28
+outline_size = 4
+
+[node name="PosterEste" type="Node3D" parent="Habitacion/PostersMacabros" unique_id=314905077]
+transform = Transform3D(0, 0, -1, 0, 1, 0, 1, 0, 0, 3.6, 1.95, 0)
+
+[node name="MarcoPoster" type="MeshInstance3D" parent="Habitacion/PostersMacabros/PosterEste" unique_id=430594307]
+material_override = SubResource("StandardMaterial3D_poster_frame")
+mesh = SubResource("BoxMesh_poster_frame")
+
+[node name="PapelPoster" type="MeshInstance3D" parent="Habitacion/PostersMacabros/PosterEste" unique_id=1763401541]
+material_override = SubResource("StandardMaterial3D_poster_paper")
+mesh = SubResource("BoxMesh_poster_paper")
+
+[node name="TextoPoster" type="Label3D" parent="Habitacion/PostersMacabros/PosterEste" unique_id=837420213]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.025)
+pixel_size = 0.0024
+modulate = Color(0.45, 0.04, 0.04, 1)
+outline_modulate = Color(0.08, 0.04, 0.04, 1)
+text = "SOLO 1 SOBREVIVIENTE
+SALE VIVO DE ESTA MESA"
+font_size = 30
+outline_size = 4
+
+[node name="PosterOeste" type="Node3D" parent="Habitacion/PostersMacabros" unique_id=1401288780]
+transform = Transform3D(0, 0, 1, 0, 1, 0, -1, 0, 0, -3.6, 1.95, 0)
+
+[node name="MarcoPoster" type="MeshInstance3D" parent="Habitacion/PostersMacabros/PosterOeste" unique_id=1759397463]
+material_override = SubResource("StandardMaterial3D_poster_frame")
+mesh = SubResource("BoxMesh_poster_frame")
+
+[node name="PapelPoster" type="MeshInstance3D" parent="Habitacion/PostersMacabros/PosterOeste" unique_id=1314062535]
+material_override = SubResource("StandardMaterial3D_poster_paper")
+mesh = SubResource("BoxMesh_poster_paper")
+
+[node name="TextoPoster" type="Label3D" parent="Habitacion/PostersMacabros/PosterOeste" unique_id=1403469258]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.025)
+pixel_size = 0.0024
+modulate = Color(0.45, 0.04, 0.04, 1)
+outline_modulate = Color(0.08, 0.04, 0.04, 1)
+text = "PROHIBIDO RETIRAR LA MANO
+EL COCODRILO SIEMPRE TIENE HAMBRE"
+font_size = 26
+outline_size = 4
+
+[node name="RestosAmputados" type="Node3D" parent="Habitacion" unique_id=864705005]
+
+[node name="PiernaColgadaNorte_Izq" type="Node3D" parent="Habitacion/RestosAmputados" unique_id=880354261]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.55, 1.55, -3.52)
+
+[node name="HuesoExpuesto" type="MeshInstance3D" parent="Habitacion/RestosAmputados/PiernaColgadaNorte_Izq" unique_id=740632821]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.25, 0)
+material_override = SubResource("StandardMaterial3D_bone")
+mesh = SubResource("CylinderMesh_bone")
+
+[node name="CorteSangre" type="MeshInstance3D" parent="Habitacion/RestosAmputados/PiernaColgadaNorte_Izq" unique_id=911374681]
+transform = Transform3D(0.18, 0, 0, 0, 1, 0, 0, 0, 0.18, 0, 0.19, 0)
+material_override = SubResource("StandardMaterial3D_blood_wall")
+mesh = SubResource("CylinderMesh_blood_splat")
+
+[node name="MusloAmputado" type="MeshInstance3D" parent="Habitacion/RestosAmputados/PiernaColgadaNorte_Izq" unique_id=1395836210]
+material_override = SubResource("StandardMaterial3D_flesh")
+mesh = SubResource("CylinderMesh_thigh")
+
+[node name="Pantorrilla" type="MeshInstance3D" parent="Habitacion/RestosAmputados/PiernaColgadaNorte_Izq" unique_id=919197696]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.38, 0)
+material_override = SubResource("StandardMaterial3D_flesh")
+mesh = SubResource("CylinderMesh_calf")
+
+[node name="Pie" type="MeshInstance3D" parent="Habitacion/RestosAmputados/PiernaColgadaNorte_Izq" unique_id=681657917]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.58, 0.05)
+material_override = SubResource("StandardMaterial3D_flesh")
+mesh = SubResource("BoxMesh_foot")
+
+[node name="PiernaColgadaNorte_Der" type="Node3D" parent="Habitacion/RestosAmputados" unique_id=68425900]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.65, 1.6, -3.52)
+
+[node name="HuesoExpuesto" type="MeshInstance3D" parent="Habitacion/RestosAmputados/PiernaColgadaNorte_Der" unique_id=2145797358]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.25, 0)
+material_override = SubResource("StandardMaterial3D_bone")
+mesh = SubResource("CylinderMesh_bone")
+
+[node name="MusloAmputado" type="MeshInstance3D" parent="Habitacion/RestosAmputados/PiernaColgadaNorte_Der" unique_id=254666254]
+material_override = SubResource("StandardMaterial3D_flesh")
+mesh = SubResource("CylinderMesh_thigh")
+
+[node name="Pantorrilla" type="MeshInstance3D" parent="Habitacion/RestosAmputados/PiernaColgadaNorte_Der" unique_id=216260878]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.38, 0)
+material_override = SubResource("StandardMaterial3D_flesh")
+mesh = SubResource("CylinderMesh_calf")
+
+[node name="Pie" type="MeshInstance3D" parent="Habitacion/RestosAmputados/PiernaColgadaNorte_Der" unique_id=1489025826]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.58, 0.05)
+material_override = SubResource("StandardMaterial3D_flesh")
+mesh = SubResource("BoxMesh_foot")
+
+[node name="PiernaColgadaEste" type="Node3D" parent="Habitacion/RestosAmputados" unique_id=766680570]
+transform = Transform3D(0, 0, -1, 0, 1, 0, 1, 0, 0, 3.52, 1.5, -1.45)
+
+[node name="HuesoExpuesto" type="MeshInstance3D" parent="Habitacion/RestosAmputados/PiernaColgadaEste" unique_id=646245212]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.25, 0)
+material_override = SubResource("StandardMaterial3D_bone")
+mesh = SubResource("CylinderMesh_bone")
+
+[node name="MusloAmputado" type="MeshInstance3D" parent="Habitacion/RestosAmputados/PiernaColgadaEste" unique_id=805764021]
+material_override = SubResource("StandardMaterial3D_flesh")
+mesh = SubResource("CylinderMesh_thigh")
+
+[node name="Pantorrilla" type="MeshInstance3D" parent="Habitacion/RestosAmputados/PiernaColgadaEste" unique_id=1194562507]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.38, 0)
+material_override = SubResource("StandardMaterial3D_flesh")
+mesh = SubResource("CylinderMesh_calf")
+
+[node name="PiernaColgadaOeste" type="Node3D" parent="Habitacion/RestosAmputados" unique_id=1021997012]
+transform = Transform3D(0, 0, 1, 0, 1, 0, -1, 0, 0, -3.52, 1.5, 1.35)
+
+[node name="HuesoExpuesto" type="MeshInstance3D" parent="Habitacion/RestosAmputados/PiernaColgadaOeste" unique_id=1714322224]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.25, 0)
+material_override = SubResource("StandardMaterial3D_bone")
+mesh = SubResource("CylinderMesh_bone")
+
+[node name="MusloAmputado" type="MeshInstance3D" parent="Habitacion/RestosAmputados/PiernaColgadaOeste" unique_id=949447812]
+material_override = SubResource("StandardMaterial3D_flesh")
+mesh = SubResource("CylinderMesh_thigh")
+
+[node name="Pantorrilla" type="MeshInstance3D" parent="Habitacion/RestosAmputados/PiernaColgadaOeste" unique_id=1379535267]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.38, 0)
+material_override = SubResource("StandardMaterial3D_flesh")
+mesh = SubResource("CylinderMesh_calf")
+
+[node name="ManoClavadaNorte" type="MeshInstance3D" parent="Habitacion/RestosAmputados" unique_id=1962947135]
+transform = Transform3D(0.96, -0.25, 0, 0.25, 0.96, 0, 0, 0, 1, -2.35, 1.75, -3.58)
+material_override = SubResource("StandardMaterial3D_flesh")
+mesh = SubResource("BoxMesh_wall_hand")
+
+[node name="ManoClavadaSur" type="MeshInstance3D" parent="Habitacion/RestosAmputados" unique_id=1432129104]
+transform = Transform3D(0.96, 0.25, 0, -0.25, 0.96, 0, 0, 0, 1, 1.5, 1.55, 3.58)
+material_override = SubResource("StandardMaterial3D_flesh")
+mesh = SubResource("BoxMesh_wall_hand")
+
+[node name="ManoClavadaEste" type="MeshInstance3D" parent="Habitacion/RestosAmputados" unique_id=460088246]
+transform = Transform3D(0, 0, 1, 0, 1, 0, -1, 0, 0, 3.58, 1.65, 1.65)
+material_override = SubResource("StandardMaterial3D_flesh")
+mesh = SubResource("BoxMesh_wall_hand")
+
+[node name="ManoClavadaOeste" type="MeshInstance3D" parent="Habitacion/RestosAmputados" unique_id=1755359859]
+transform = Transform3D(0, 0, 1, 0, 1, 0, -1, 0, 0, -3.58, 1.65, -1.65)
+material_override = SubResource("StandardMaterial3D_flesh")
+mesh = SubResource("BoxMesh_wall_hand")
+
+[node name="LucesParedes" type="Node3D" parent="Habitacion" unique_id=308808375]
+
+[node name="LuzParedNorte" type="OmniLight3D" parent="Habitacion/LucesParedes" unique_id=1473038367]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.2, -2.85)
+light_color = Color(0.85, 0.28, 0.18, 1)
+light_energy = 0.75
+omni_range = 3.8
+
+[node name="LuzParedSur" type="OmniLight3D" parent="Habitacion/LucesParedes" unique_id=863725555]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.2, 2.85)
+light_color = Color(0.85, 0.28, 0.18, 1)
+light_energy = 0.75
+omni_range = 3.8
+
+[node name="LuzParedEste" type="OmniLight3D" parent="Habitacion/LucesParedes" unique_id=899950087]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.85, 2.2, 0)
+light_color = Color(0.85, 0.28, 0.18, 1)
+light_energy = 0.75
+omni_range = 3.8
+
+[node name="LuzParedOeste" type="OmniLight3D" parent="Habitacion/LucesParedes" unique_id=1726861916]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.85, 2.2, 0)
+light_color = Color(0.85, 0.28, 0.18, 1)
+light_energy = 0.75
+omni_range = 3.8
+
+[node name="PivoteLampara" type="Node3D" parent="Habitacion" unique_id=372292426]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.2, 0)
+script = ExtResource("6_rl")
+
+[node name="Cable" type="MeshInstance3D" parent="Habitacion/PivoteLampara" unique_id=1545676338]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.625, 0)
+material_override = SubResource("StandardMaterial3D_cord")
+mesh = SubResource("CylinderMesh_cord")
+
+[node name="PantallaLampara" type="MeshInstance3D" parent="Habitacion/PivoteLampara" unique_id=1806311724]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.25, 0)
+material_override = SubResource("StandardMaterial3D_cord")
+mesh = SubResource("CylinderMesh_shade")
+
+[node name="Bombilla" type="MeshInstance3D" parent="Habitacion/PivoteLampara" unique_id=1806731857]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.3, 0)
+material_override = SubResource("StandardMaterial3D_bulb")
+mesh = SubResource("SphereMesh_bulb")
+
+[node name="FocoLuz" type="SpotLight3D" parent="Habitacion/PivoteLampara" unique_id=299237477]
+transform = Transform3D(1, 0, 0, 0, 0, 1, 0, -1, 0, 0, -1.31, 0)
+light_color = Color(1, 0.86, 0.66, 1)
+light_energy = 6.2
+shadow_enabled = true
+spot_range = 6.5
+spot_angle = 52.0
+spot_angle_attenuation = 1.8
+
+[node name="LuzRelleno" type="OmniLight3D" parent="Habitacion" unique_id=966482940]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.75, 0)
+light_color = Color(0.75, 0.62, 0.5, 1)
+light_energy = 0.55
+omni_range = 3.6
+
+[node name="Mesa" type="Node3D" parent="." unique_id=1705195630]
+
+[node name="TableroMesa" type="MeshInstance3D" parent="Mesa" unique_id=385866344]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.72, 0)
+material_override = SubResource("StandardMaterial3D_table")
+mesh = SubResource("CylinderMesh_table_top")
+
+[node name="PataMesa" type="MeshInstance3D" parent="Mesa" unique_id=2081526003]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.35, 0)
+material_override = SubResource("StandardMaterial3D_table_rim")
+mesh = SubResource("CylinderMesh_table_leg")
+
+[node name="PlatoGiratorio" type="Node3D" parent="Mesa" unique_id=416893221]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.76, 0)
+script = ExtResource("9_pg")
+
+[node name="DiscoMetalico" type="MeshInstance3D" parent="Mesa/PlatoGiratorio" unique_id=397008681]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.01, 0)
+material_override = SubResource("StandardMaterial3D_table_rim")
+mesh = SubResource("CylinderMesh_disc")
+
+[node name="MaquinaCocodrilo" parent="Mesa/PlatoGiratorio" unique_id=2007178624 instance=ExtResource("2_cm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.02, 0)
+
+[node name="Jugadores" type="Node3D" parent="." unique_id=1192307505]
+
+[node name="Jugador_1" parent="Jugadores" unique_id=54960994 instance=ExtResource("3_ps")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1.82)
+
+[node name="Jugador_2" parent="Jugadores" unique_id=358852627 instance=ExtResource("3_ps")]
+transform = Transform3D(0.2697768, 0, 0.9629234, 0, 1, 0, -0.9629234, 0, 0.2697768, 1.73092, 0, 0.562411)
+indice_asiento = 1
+nombre_jugador = "Sujeto IA 2"
+es_ia = true
+
+[node name="Jugador_3" parent="Jugadores" unique_id=1633151705 instance=ExtResource("3_ps")]
+transform = Transform3D(-0.8299348, 0, 0.55786014, 0, 1, 0, -0.55786014, 0, -0.8299348, 1.06977, 0, -1.47241)
+indice_asiento = 2
+nombre_jugador = "Sujeto IA 3"
+es_ia = true
+
+[node name="Jugador_4" parent="Jugadores" unique_id=1882577821 instance=ExtResource("3_ps")]
+transform = Transform3D(-0.7742506, 0, -0.63287884, 0, 1, 0, 0.63287884, 0, -0.7742506, -1.06977, 0, -1.47241)
+indice_asiento = 3
+nombre_jugador = "Sujeto IA 4"
+es_ia = true
+
+[node name="Jugador_5" parent="Jugadores" unique_id=1325436254 instance=ExtResource("3_ps")]
+transform = Transform3D(0.29018718, 0, -0.9569704, 0, 1, 0, 0.9569704, 0, 0.29018718, -1.73092, 0, 0.562411)
+indice_asiento = 4
+nombre_jugador = "Sujeto IA 5"
+es_ia = true
+
+[node name="CamaraPrincipal" type="Camera3D" parent="." unique_id=796356543]
+transform = Transform3D(1, 0, 0, 0, 0.88, 0.47, 0, -0.47, 0.88, 0, 1.48, 1.15)
+current = true
+fov = 52.0
+script = ExtResource("7_cam")
+
+[node name="EfectosSonido" type="Node" parent="." unique_id=1046688048]
+script = ExtResource("4_sfx")
+
+[node name="ControladorIA" type="Node" parent="." unique_id=213765563]
+script = ExtResource("5_ai")
+
+[node name="InterfazJuego" type="CanvasLayer" parent="." unique_id=875552069]
+script = ExtResource("8_ui")
+
+[node name="DestelloSangre" type="ColorRect" parent="InterfazJuego" unique_id=1565667364]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0.65, 0.02, 0.02, 0)
+
+[node name="PanelSuperiorHUD" type="Panel" parent="InterfazJuego" unique_id=1977108358]
+anchors_preset = 10
+anchor_right = 1.0
+offset_left = 24.0
+offset_right = -24.0
+offset_bottom = 68.0
+grow_horizontal = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_barra_sup")
+script = ExtResource("10_hud")
+
+[node name="EtiquetaTurno" type="Label" parent="InterfazJuego/PanelSuperiorHUD" unique_id=314848668]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 24.0
+offset_top = -18.0
+offset_right = 380.0
+offset_bottom = 18.0
+grow_vertical = 2
+theme_override_colors/font_color = Color(1, 0.86, 0.38, 1)
+theme_override_font_sizes/font_size = 22
+text = "TURNO: JUGADOR 1"
+vertical_alignment = 1
+
+[node name="EtiquetaManos" type="Label" parent="InterfazJuego/PanelSuperiorHUD" unique_id=1160752967]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -250.0
+offset_top = -18.0
+offset_right = 10.0
+offset_bottom = 18.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0.95, 0.9, 0.85, 1)
+theme_override_font_sizes/font_size = 20
+text = "MANOS SANAS: 2 / 2"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="EtiquetaBotones" type="Label" parent="InterfazJuego/PanelSuperiorHUD" unique_id=196580793]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 20.0
+offset_top = -18.0
+offset_right = 310.0
+offset_bottom = 18.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0.92, 0.65, 0.58, 1)
+theme_override_font_sizes/font_size = 18
+text = "BOTONES: 20 / 20"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="BotonCambiarVista" type="Button" parent="InterfazJuego/PanelSuperiorHUD" unique_id=1690054614]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -315.0
+offset_top = -20.0
+offset_right = -140.0
+offset_bottom = 20.0
+grow_horizontal = 0
+grow_vertical = 2
+theme_override_font_sizes/font_size = 15
+theme_override_styles/normal = SubResource("StyleBoxFlat_boton_hud")
+text = "Vista: Fauces"
+
+[node name="BotonAbrirMenu" type="Button" parent="InterfazJuego/PanelSuperiorHUD" unique_id=2123258982]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -126.0
+offset_top = -20.0
+offset_right = -20.0
+offset_bottom = 20.0
+grow_horizontal = 0
+grow_vertical = 2
+theme_override_font_sizes/font_size = 15
+theme_override_styles/normal = SubResource("StyleBoxFlat_boton_hud")
+text = "Menú"
+
+[node name="PanelInferiorAviso" type="Panel" parent="InterfazJuego" unique_id=263125472]
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 140.0
+offset_top = -84.0
+offset_right = -140.0
+offset_bottom = -18.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_styles/panel = SubResource("StyleBoxFlat_barra_inf")
+
+[node name="EtiquetaAviso" type="Label" parent="InterfazJuego/PanelInferiorAviso" unique_id=1421842591]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 20.0
+offset_top = 8.0
+offset_right = -20.0
+offset_bottom = -8.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0.98, 0.94, 0.88, 1)
+theme_override_font_sizes/font_size = 19
+text = "Haz clic directamente sobre cualquiera de los 20 botones en la lengua del cocodrilo."
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 3
+
+[node name="MenuInicio" type="Panel" parent="InterfazJuego" unique_id=662683709]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -260.0
+offset_top = -215.0
+offset_right = 260.0
+offset_bottom = 215.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_menu_inicio")
+script = ExtResource("11_mi")
+
+[node name="EtiquetaTitulo" type="Label" parent="InterfazJuego/MenuInicio" unique_id=1253476262]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_top = 24.0
+offset_bottom = 66.0
+grow_horizontal = 2
+theme_override_colors/font_color = Color(0.95, 0.24, 0.2, 1)
+theme_override_font_sizes/font_size = 30
+text = "LA FAUCE DEL COCODRILO"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="EtiquetaSubtitulo" type="Label" parent="InterfazJuego/MenuInicio" unique_id=274118628]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_left = 28.0
+offset_top = 68.0
+offset_right = -28.0
+offset_bottom = 114.0
+grow_horizontal = 2
+theme_override_colors/font_color = Color(0.84, 0.78, 0.74, 1)
+theme_override_font_sizes/font_size = 15
+text = "5 Jugadores en la mesa  •  2 Manos por jugador  •  20 Botones
+Si muerde, pierdes 1 mano y se reactivan +4 botones."
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="BotonModo1Humano" type="Button" parent="InterfazJuego/MenuInicio" unique_id=385145499]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -200.0
+offset_top = -78.0
+offset_right = 200.0
+offset_bottom = -32.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 17
+theme_override_styles/normal = SubResource("StyleBoxFlat_boton_modo")
+theme_override_styles/hover = SubResource("StyleBoxFlat_boton_modo_hover")
+text = "1 Jugador vs 4 Bots (IA)"
+
+[node name="BotonModo2Humanos" type="Button" parent="InterfazJuego/MenuInicio" unique_id=520219813]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -200.0
+offset_top = -22.0
+offset_right = 200.0
+offset_bottom = 24.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 17
+theme_override_styles/normal = SubResource("StyleBoxFlat_boton_modo")
+theme_override_styles/hover = SubResource("StyleBoxFlat_boton_modo_hover")
+text = "2 Jugadores vs 3 Bots (IA)"
+
+[node name="BotonModo5Humanos" type="Button" parent="InterfazJuego/MenuInicio" unique_id=1132996782]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -200.0
+offset_top = 34.0
+offset_right = 200.0
+offset_bottom = 80.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 17
+theme_override_styles/normal = SubResource("StyleBoxFlat_boton_modo")
+theme_override_styles/hover = SubResource("StyleBoxFlat_boton_modo_hover")
+text = "5 Jugadores Humanos (Por Turnos)"
+
+[node name="EtiquetaModoSeleccionado" type="Label" parent="InterfazJuego/MenuInicio" unique_id=414271693]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -220.0
+offset_top = 90.0
+offset_right = 220.0
+offset_bottom = 120.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(1, 0.85, 0.4, 1)
+theme_override_font_sizes/font_size = 15
+text = "Seleccionado: 1 Jugador vs 4 Bots (IA)"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="BotonEmpezarPartida" type="Button" parent="InterfazJuego/MenuInicio" unique_id=1270449309]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -200.0
+offset_top = -76.0
+offset_right = 200.0
+offset_bottom = -22.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_font_sizes/font_size = 20
+theme_override_styles/normal = SubResource("StyleBoxFlat_boton_jugar")
+theme_override_styles/hover = SubResource("StyleBoxFlat_boton_jugar_hover")
+text = "JUGAR AHORA"
+
+[node name="MenuFinPartida" type="Panel" parent="InterfazJuego" unique_id=34931920]
+visible = false
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -250.0
+offset_top = -165.0
+offset_right = 250.0
+offset_bottom = 165.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_menu_inicio")
+script = ExtResource("12_mfp")
+
+[node name="EtiquetaTituloFin" type="Label" parent="InterfazJuego/MenuFinPartida" unique_id=1513202828]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_top = 24.0
+offset_bottom = 64.0
+grow_horizontal = 2
+theme_override_colors/font_color = Color(0.95, 0.25, 0.2, 1)
+theme_override_font_sizes/font_size = 28
+text = "¡FIN DE LA PARTIDA!"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="EtiquetaGanador" type="Label" parent="InterfazJuego/MenuFinPartida" unique_id=1661343333]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -210.0
+offset_top = -65.0
+offset_right = 210.0
+offset_bottom = 25.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(1, 0.9, 0.65, 1)
+theme_override_font_sizes/font_size = 19
+text = "¡SOBREVIVIENTE ÚNICO!"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 3
+
+[node name="BotonJugarOtraVez" type="Button" parent="InterfazJuego/MenuFinPartida" unique_id=1432230252]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -180.0
+offset_top = -118.0
+offset_right = 180.0
+offset_bottom = -70.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_font_sizes/font_size = 18
+theme_override_styles/normal = SubResource("StyleBoxFlat_boton_jugar")
+theme_override_styles/hover = SubResource("StyleBoxFlat_boton_jugar_hover")
+text = "JUGAR OTRA PARTIDA"
+
+[node name="BotonVolverAlMenu" type="Button" parent="InterfazJuego/MenuFinPartida" unique_id=1792385064]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -180.0
+offset_top = -58.0
+offset_right = 180.0
+offset_bottom = -18.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_font_sizes/font_size = 16
+theme_override_styles/normal = SubResource("StyleBoxFlat_boton_modo")
+theme_override_styles/hover = SubResource("StyleBoxFlat_boton_modo_hover")
+text = "CAMBIAR MODO DE JUEGO"

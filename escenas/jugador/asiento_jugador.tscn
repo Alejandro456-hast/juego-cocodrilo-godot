@@ -1,0 +1,260 @@
+[gd_scene format=3 uid="uid://e0o4glf4o1yh"]
+
+[ext_resource type="Script" uid="uid://cb6s7vkplkvfg" path="res://scripts/jugador/asiento_jugador.gd" id="1_ps"]
+[ext_resource type="Script" uid="uid://dmoskuyj6mrhq" path="res://scripts/jugador/trampilla_abismo.gd" id="2_ta"]
+[ext_resource type="Script" uid="uid://bvh0refgvwxkp" path="res://scripts/jugador/cuerpo_jugador.gd" id="3_cj"]
+[ext_resource type="Script" uid="uid://bram48v303au" path="res://scripts/jugador/mano_jugador.gd" id="4_mj"]
+[ext_resource type="Script" uid="uid://cxt0qfjq5xdde" path="res://scripts/jugador/cartel_estado.gd" id="5_ce"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_iron_trap"]
+albedo_color = Color(0.14, 0.12, 0.12, 1)
+metallic = 0.85
+roughness = 0.6
+
+[sub_resource type="BoxMesh" id="BoxMesh_trap_frame"]
+size = Vector3(0.86, 0.02, 0.86)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_abyss"]
+albedo_color = Color(0.01, 0, 0, 1)
+emission_enabled = true
+emission = Color(0.18, 0.01, 0.01, 1)
+emission_energy_multiplier = 0.8
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_abyss_hole"]
+top_radius = 0.38
+bottom_radius = 0.32
+height = 3.5
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_trap_door"]
+albedo_color = Color(0.18, 0.14, 0.12, 1)
+metallic = 0.78
+roughness = 0.65
+
+[sub_resource type="BoxMesh" id="BoxMesh_trap_leaf"]
+size = Vector3(0.38, 0.025, 0.76)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_wood"]
+albedo_color = Color(0.14, 0.09, 0.06, 1)
+roughness = 0.85
+
+[sub_resource type="BoxMesh" id="BoxMesh_chair_seat"]
+size = Vector3(0.46, 0.05, 0.46)
+
+[sub_resource type="BoxMesh" id="BoxMesh_chair_back"]
+size = Vector3(0.44, 0.68, 0.05)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_suit"]
+resource_local_to_scene = true
+albedo_color = Color(0.16, 0.12, 0.12, 1)
+roughness = 0.9
+
+[sub_resource type="BoxMesh" id="BoxMesh_torso"]
+size = Vector3(0.42, 0.56, 0.24)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_face"]
+albedo_color = Color(0.08, 0.07, 0.07, 1)
+roughness = 0.95
+
+[sub_resource type="SphereMesh" id="SphereMesh_head"]
+radius = 0.135
+height = 0.29
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_eye"]
+albedo_color = Color(0.9, 0.85, 0.7, 1)
+emission_enabled = true
+emission = Color(0.85, 0.75, 0.55, 1)
+emission_energy_multiplier = 1.1
+
+[sub_resource type="SphereMesh" id="SphereMesh_eye"]
+radius = 0.016
+height = 0.032
+
+[sub_resource type="BoxMesh" id="BoxMesh_forearm"]
+size = Vector3(0.085, 0.075, 0.28)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_blood"]
+albedo_color = Color(0.52, 0.03, 0.03, 1)
+roughness = 0.35
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_stump"]
+top_radius = 0.038
+bottom_radius = 0.04
+height = 0.05
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_skin"]
+albedo_color = Color(0.68, 0.52, 0.44, 1)
+roughness = 0.75
+
+[sub_resource type="BoxMesh" id="BoxMesh_palm"]
+size = Vector3(0.09, 0.032, 0.1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_finger"]
+size = Vector3(0.016, 0.02, 0.075)
+
+[node name="AsientoJugador" type="Node3D" unique_id=1842485155]
+script = ExtResource("1_ps")
+
+[node name="TrampillaAbismo" type="Node3D" parent="." unique_id=1994387731]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.01, 0.08)
+script = ExtResource("2_ta")
+
+[node name="MarcoTrampilla" type="MeshInstance3D" parent="TrampillaAbismo" unique_id=1754192259]
+material_override = SubResource("StandardMaterial3D_iron_trap")
+mesh = SubResource("BoxMesh_trap_frame")
+
+[node name="AgujeroAbismo" type="MeshInstance3D" parent="TrampillaAbismo" unique_id=1120335660]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.74, 0)
+visible = false
+material_override = SubResource("StandardMaterial3D_abyss")
+mesh = SubResource("CylinderMesh_abyss_hole")
+
+[node name="LuzAbismo" type="OmniLight3D" parent="TrampillaAbismo" unique_id=1208202893]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.35, 0)
+visible = false
+light_color = Color(0.95, 0.12, 0.05, 1)
+light_energy = 3.2
+omni_range = 2.4
+
+[node name="PuertaTrampillaIzq" type="Node3D" parent="TrampillaAbismo" unique_id=1683943040]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.38, 0.015, 0)
+
+[node name="HojaMetalicaIzq" type="MeshInstance3D" parent="TrampillaAbismo/PuertaTrampillaIzq" unique_id=543120654]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.19, 0, 0)
+material_override = SubResource("StandardMaterial3D_trap_door")
+mesh = SubResource("BoxMesh_trap_leaf")
+
+[node name="PuertaTrampillaDer" type="Node3D" parent="TrampillaAbismo" unique_id=1117025134]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.38, 0.015, 0)
+
+[node name="HojaMetalicaDer" type="MeshInstance3D" parent="TrampillaAbismo/PuertaTrampillaDer" unique_id=1115133959]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.19, 0, 0)
+material_override = SubResource("StandardMaterial3D_trap_door")
+mesh = SubResource("BoxMesh_trap_leaf")
+
+[node name="AsientoSilla" type="MeshInstance3D" parent="." unique_id=555575083]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.46, 0.08)
+material_override = SubResource("StandardMaterial3D_wood")
+mesh = SubResource("BoxMesh_chair_seat")
+
+[node name="RespaldoSilla" type="MeshInstance3D" parent="." unique_id=1777095429]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.82, 0.29)
+material_override = SubResource("StandardMaterial3D_wood")
+mesh = SubResource("BoxMesh_chair_back")
+
+[node name="Torso" type="Node3D" parent="." unique_id=1008794400]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.92, 0.06)
+script = ExtResource("3_cj")
+
+[node name="MallaTorso" type="MeshInstance3D" parent="Torso" unique_id=566636102]
+material_override = SubResource("StandardMaterial3D_suit")
+mesh = SubResource("BoxMesh_torso")
+
+[node name="Cabeza" type="Node3D" parent="Torso" unique_id=1283320262]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.42, -0.02)
+
+[node name="MallaCabeza" type="MeshInstance3D" parent="Torso/Cabeza" unique_id=1977654515]
+material_override = SubResource("StandardMaterial3D_face")
+mesh = SubResource("SphereMesh_head")
+
+[node name="OjoIzquierdo" type="MeshInstance3D" parent="Torso/Cabeza" unique_id=1862624754]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.045, 0.02, -0.125)
+material_override = SubResource("StandardMaterial3D_eye")
+mesh = SubResource("SphereMesh_eye")
+
+[node name="OjoDerecho" type="MeshInstance3D" parent="Torso/Cabeza" unique_id=139577507]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.045, 0.02, -0.125)
+material_override = SubResource("StandardMaterial3D_eye")
+mesh = SubResource("SphereMesh_eye")
+
+[node name="ManoDerecha" type="Node3D" parent="." unique_id=1372529834]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.19, 0.79, -0.44)
+script = ExtResource("4_mj")
+
+[node name="Antebrazo" type="MeshInstance3D" parent="ManoDerecha" unique_id=1441206283]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.01, 0.18)
+material_override = SubResource("StandardMaterial3D_suit")
+mesh = SubResource("BoxMesh_forearm")
+
+[node name="MunonSangriento" type="MeshInstance3D" parent="ManoDerecha" unique_id=1547635093]
+transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, 0, 0.01, 0.03)
+visible = false
+material_override = SubResource("StandardMaterial3D_blood")
+mesh = SubResource("CylinderMesh_stump")
+
+[node name="PalmaCompleta" type="Node3D" parent="ManoDerecha" unique_id=318862446]
+
+[node name="Palma" type="MeshInstance3D" parent="ManoDerecha/PalmaCompleta" unique_id=1961759502]
+material_override = SubResource("StandardMaterial3D_skin")
+mesh = SubResource("BoxMesh_palm")
+
+[node name="Dedo1" type="MeshInstance3D" parent="ManoDerecha/PalmaCompleta" unique_id=1942259248]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.033, -0.004, -0.075)
+material_override = SubResource("StandardMaterial3D_skin")
+mesh = SubResource("BoxMesh_finger")
+
+[node name="Dedo2" type="MeshInstance3D" parent="ManoDerecha/PalmaCompleta" unique_id=1276813408]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.011, -0.004, -0.075)
+material_override = SubResource("StandardMaterial3D_skin")
+mesh = SubResource("BoxMesh_finger")
+
+[node name="Dedo3" type="MeshInstance3D" parent="ManoDerecha/PalmaCompleta" unique_id=355742196]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.011, -0.004, -0.075)
+material_override = SubResource("StandardMaterial3D_skin")
+mesh = SubResource("BoxMesh_finger")
+
+[node name="Dedo4" type="MeshInstance3D" parent="ManoDerecha/PalmaCompleta" unique_id=1590647872]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.033, -0.004, -0.075)
+material_override = SubResource("StandardMaterial3D_skin")
+mesh = SubResource("BoxMesh_finger")
+
+[node name="ManoIzquierda" type="Node3D" parent="." unique_id=2988515]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.19, 0.79, -0.44)
+script = ExtResource("4_mj")
+
+[node name="Antebrazo" type="MeshInstance3D" parent="ManoIzquierda" unique_id=316864866]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.01, 0.18)
+material_override = SubResource("StandardMaterial3D_suit")
+mesh = SubResource("BoxMesh_forearm")
+
+[node name="MunonSangriento" type="MeshInstance3D" parent="ManoIzquierda" unique_id=724363895]
+transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, 0, 0.01, 0.03)
+visible = false
+material_override = SubResource("StandardMaterial3D_blood")
+mesh = SubResource("CylinderMesh_stump")
+
+[node name="PalmaCompleta" type="Node3D" parent="ManoIzquierda" unique_id=580452179]
+
+[node name="Palma" type="MeshInstance3D" parent="ManoIzquierda/PalmaCompleta" unique_id=936178857]
+material_override = SubResource("StandardMaterial3D_skin")
+mesh = SubResource("BoxMesh_palm")
+
+[node name="Dedo1" type="MeshInstance3D" parent="ManoIzquierda/PalmaCompleta" unique_id=1302426267]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.033, -0.004, -0.075)
+material_override = SubResource("StandardMaterial3D_skin")
+mesh = SubResource("BoxMesh_finger")
+
+[node name="Dedo2" type="MeshInstance3D" parent="ManoIzquierda/PalmaCompleta" unique_id=923301874]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.011, -0.004, -0.075)
+material_override = SubResource("StandardMaterial3D_skin")
+mesh = SubResource("BoxMesh_finger")
+
+[node name="Dedo3" type="MeshInstance3D" parent="ManoIzquierda/PalmaCompleta" unique_id=1800975847]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.011, -0.004, -0.075)
+material_override = SubResource("StandardMaterial3D_skin")
+mesh = SubResource("BoxMesh_finger")
+
+[node name="Dedo4" type="MeshInstance3D" parent="ManoIzquierda/PalmaCompleta" unique_id=743656995]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.033, -0.004, -0.075)
+material_override = SubResource("StandardMaterial3D_skin")
+mesh = SubResource("BoxMesh_finger")
+
+[node name="CartelEstado" type="Label3D" parent="." unique_id=823612030]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.65, 0)
+pixel_size = 0.0022
+billboard = 1
+outline_modulate = Color(0.02, 0.02, 0.02, 1)
+text = "Jugador 1 [HUMANO]
+MANOS: [ 2 / 2 ]"
+font_size = 28
+outline_size = 8
+script = ExtResource("5_ce")

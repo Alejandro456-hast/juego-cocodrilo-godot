@@ -1,0 +1,459 @@
+[gd_scene load_steps=14 format=3]
+
+[ext_resource type="Script" path="res://scripts/interfaz/gestor_interfaz.gd" id="1_ui"]
+[ext_resource type="Script" path="res://scripts/interfaz/panel_superior_hud.gd" id="2_hud"]
+[ext_resource type="Script" path="res://scripts/interfaz/menu_inicio.gd" id="3_mi"]
+[ext_resource type="Script" path="res://scripts/interfaz/menu_fin_partida.gd" id="4_mfp"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_barra_sup"]
+bg_color = Color(0.05, 0.04, 0.04, 0.88)
+border_width_bottom = 2
+border_color = Color(0.65, 0.16, 0.14, 0.9)
+corner_radius_bottom_right = 12
+corner_radius_bottom_left = 12
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_boton_hud"]
+bg_color = Color(0.16, 0.09, 0.09, 0.95)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.75, 0.25, 0.2, 0.8)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_barra_inf"]
+bg_color = Color(0.04, 0.03, 0.03, 0.86)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.55, 0.15, 0.12, 0.85)
+corner_radius_top_left = 14
+corner_radius_top_right = 14
+corner_radius_bottom_right = 14
+corner_radius_bottom_left = 14
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_menu_inicio"]
+bg_color = Color(0.06, 0.04, 0.04, 0.94)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0.78, 0.18, 0.15, 1)
+corner_radius_top_left = 18
+corner_radius_top_right = 18
+corner_radius_bottom_right = 18
+corner_radius_bottom_left = 18
+shadow_color = Color(0, 0, 0, 0.75)
+shadow_size = 24
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_boton_modo"]
+bg_color = Color(0.13, 0.1, 0.1, 0.95)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.45, 0.22, 0.2, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_boton_modo_hover"]
+bg_color = Color(0.24, 0.12, 0.12, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.95, 0.65, 0.25, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_boton_jugar"]
+bg_color = Color(0.68, 0.12, 0.1, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(1, 0.75, 0.35, 1)
+corner_radius_top_left = 12
+corner_radius_top_right = 12
+corner_radius_bottom_right = 12
+corner_radius_bottom_left = 12
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_boton_jugar_hover"]
+bg_color = Color(0.85, 0.18, 0.14, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(1, 0.88, 0.5, 1)
+corner_radius_top_left = 12
+corner_radius_top_right = 12
+corner_radius_bottom_right = 12
+corner_radius_bottom_left = 12
+
+[node name="InterfazJuego" type="CanvasLayer"]
+script = ExtResource("1_ui")
+
+[node name="DestelloSangre" type="ColorRect" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0.65, 0.02, 0.02, 0)
+
+[node name="PanelSuperiorHUD" type="Panel" parent="."]
+anchors_preset = 10
+anchor_right = 1.0
+offset_left = 24.0
+offset_right = -24.0
+offset_bottom = 68.0
+grow_horizontal = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_barra_sup")
+script = ExtResource("2_hud")
+
+[node name="EtiquetaTurno" type="Label" parent="PanelSuperiorHUD"]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 24.0
+offset_top = -18.0
+offset_right = 380.0
+offset_bottom = 18.0
+grow_vertical = 2
+theme_override_colors/font_color = Color(1, 0.86, 0.38, 1)
+theme_override_font_sizes/font_size = 22
+text = "TURNO: JUGADOR 1"
+vertical_alignment = 1
+
+[node name="EtiquetaManos" type="Label" parent="PanelSuperiorHUD"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -250.0
+offset_top = -18.0
+offset_right = 10.0
+offset_bottom = 18.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0.95, 0.9, 0.85, 1)
+theme_override_font_sizes/font_size = 20
+text = "MANOS SANAS: 2 / 2"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="EtiquetaBotones" type="Label" parent="PanelSuperiorHUD"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 20.0
+offset_top = -18.0
+offset_right = 310.0
+offset_bottom = 18.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0.92, 0.65, 0.58, 1)
+theme_override_font_sizes/font_size = 18
+text = "BOTONES: 20 / 20"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="BotonCambiarVista" type="Button" parent="PanelSuperiorHUD"]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -315.0
+offset_top = -20.0
+offset_right = -140.0
+offset_bottom = 20.0
+grow_horizontal = 0
+grow_vertical = 2
+theme_override_font_sizes/font_size = 15
+theme_override_styles/normal = SubResource("StyleBoxFlat_boton_hud")
+text = "Vista: Fauces"
+
+[node name="BotonAbrirMenu" type="Button" parent="PanelSuperiorHUD"]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -126.0
+offset_top = -20.0
+offset_right = -20.0
+offset_bottom = 20.0
+grow_horizontal = 0
+grow_vertical = 2
+theme_override_font_sizes/font_size = 15
+theme_override_styles/normal = SubResource("StyleBoxFlat_boton_hud")
+text = "Menú"
+
+[node name="PanelInferiorAviso" type="Panel" parent="."]
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 140.0
+offset_top = -84.0
+offset_right = -140.0
+offset_bottom = -18.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_styles/panel = SubResource("StyleBoxFlat_barra_inf")
+
+[node name="EtiquetaAviso" type="Label" parent="PanelInferiorAviso"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 20.0
+offset_top = 8.0
+offset_right = -20.0
+offset_bottom = -8.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0.98, 0.94, 0.88, 1)
+theme_override_font_sizes/font_size = 19
+text = "Haz clic directamente sobre cualquiera de los 20 botones en la lengua del cocodrilo."
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 3
+
+[node name="MenuInicio" type="Panel" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -260.0
+offset_top = -215.0
+offset_right = 260.0
+offset_bottom = 215.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_menu_inicio")
+script = ExtResource("3_mi")
+
+[node name="EtiquetaTitulo" type="Label" parent="MenuInicio"]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_top = 24.0
+offset_bottom = 66.0
+grow_horizontal = 2
+theme_override_colors/font_color = Color(0.95, 0.24, 0.2, 1)
+theme_override_font_sizes/font_size = 30
+text = "LA FAUCE DEL COCODRILO"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="EtiquetaSubtitulo" type="Label" parent="MenuInicio"]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_left = 28.0
+offset_top = 68.0
+offset_right = -28.0
+offset_bottom = 114.0
+grow_horizontal = 2
+theme_override_colors/font_color = Color(0.84, 0.78, 0.74, 1)
+theme_override_font_sizes/font_size = 15
+text = "5 Jugadores en la mesa  •  2 Manos por jugador  •  20 Botones
+Si muerde, pierdes 1 mano y se reactivan +4 botones."
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="BotonModo1Humano" type="Button" parent="MenuInicio"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -200.0
+offset_top = -78.0
+offset_right = 200.0
+offset_bottom = -32.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 17
+theme_override_styles/normal = SubResource("StyleBoxFlat_boton_modo")
+theme_override_styles/hover = SubResource("StyleBoxFlat_boton_modo_hover")
+text = "1 Jugador vs 4 Bots (IA)"
+
+[node name="BotonModo2Humanos" type="Button" parent="MenuInicio"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -200.0
+offset_top = -22.0
+offset_right = 200.0
+offset_bottom = 24.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 17
+theme_override_styles/normal = SubResource("StyleBoxFlat_boton_modo")
+theme_override_styles/hover = SubResource("StyleBoxFlat_boton_modo_hover")
+text = "2 Jugadores vs 3 Bots (IA)"
+
+[node name="BotonModo5Humanos" type="Button" parent="MenuInicio"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -200.0
+offset_top = 34.0
+offset_right = 200.0
+offset_bottom = 80.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 17
+theme_override_styles/normal = SubResource("StyleBoxFlat_boton_modo")
+theme_override_styles/hover = SubResource("StyleBoxFlat_boton_modo_hover")
+text = "5 Jugadores Humanos (Por Turnos)"
+
+[node name="EtiquetaModoSeleccionado" type="Label" parent="MenuInicio"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -220.0
+offset_top = 90.0
+offset_right = 220.0
+offset_bottom = 120.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(1, 0.85, 0.4, 1)
+theme_override_font_sizes/font_size = 15
+text = "Seleccionado: 1 Jugador vs 4 Bots (IA)"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="BotonEmpezarPartida" type="Button" parent="MenuInicio"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -200.0
+offset_top = -76.0
+offset_right = 200.0
+offset_bottom = -22.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_font_sizes/font_size = 20
+theme_override_styles/normal = SubResource("StyleBoxFlat_boton_jugar")
+theme_override_styles/hover = SubResource("StyleBoxFlat_boton_jugar_hover")
+text = "JUGAR AHORA"
+
+[node name="MenuFinPartida" type="Panel" parent="."]
+visible = false
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -250.0
+offset_top = -165.0
+offset_right = 250.0
+offset_bottom = 165.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_menu_inicio")
+script = ExtResource("4_mfp")
+
+[node name="EtiquetaTituloFin" type="Label" parent="MenuFinPartida"]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_top = 24.0
+offset_bottom = 64.0
+grow_horizontal = 2
+theme_override_colors/font_color = Color(0.95, 0.25, 0.2, 1)
+theme_override_font_sizes/font_size = 28
+text = "¡FIN DE LA PARTIDA!"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="EtiquetaGanador" type="Label" parent="MenuFinPartida"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -210.0
+offset_top = -65.0
+offset_right = 210.0
+offset_bottom = 25.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(1, 0.9, 0.65, 1)
+theme_override_font_sizes/font_size = 19
+text = "¡SOBREVIVIENTE ÚNICO!"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 3
+
+[node name="BotonJugarOtraVez" type="Button" parent="MenuFinPartida"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -180.0
+offset_top = -118.0
+offset_right = 180.0
+offset_bottom = -70.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_font_sizes/font_size = 18
+theme_override_styles/normal = SubResource("StyleBoxFlat_boton_jugar")
+theme_override_styles/hover = SubResource("StyleBoxFlat_boton_jugar_hover")
+text = "JUGAR OTRA PARTIDA"
+
+[node name="BotonVolverAlMenu" type="Button" parent="MenuFinPartida"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -180.0
+offset_top = -58.0
+offset_right = 180.0
+offset_bottom = -18.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_font_sizes/font_size = 16
+theme_override_styles/normal = SubResource("StyleBoxFlat_boton_modo")
+theme_override_styles/hover = SubResource("StyleBoxFlat_boton_modo_hover")
+text = "CAMBIAR MODO DE JUEGO"

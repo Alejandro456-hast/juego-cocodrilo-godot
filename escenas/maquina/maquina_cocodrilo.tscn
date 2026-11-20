@@ -1,0 +1,413 @@
+[gd_scene format=3 uid="uid://bvx08ixpo80m4"]
+
+[ext_resource type="Script" uid="uid://coygjwipigqsg" path="res://scripts/maquina/maquina_cocodrilo.gd" id="1_cm"]
+[ext_resource type="PackedScene" path="res://escenas/maquina/boton_lengua.tscn" id="2_tb"]
+[ext_resource type="Script" uid="uid://dohxo3dcvas" path="res://scripts/maquina/mandibula_superior.gd" id="3_ms"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_iron"]
+albedo_color = Color(0.13, 0.11, 0.1, 1)
+metallic = 0.88
+roughness = 0.55
+
+[sub_resource type="BoxMesh" id="BoxMesh_base"]
+size = Vector3(0.66, 0.045, 0.92)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_croc"]
+albedo_color = Color(0.11, 0.16, 0.1, 1)
+metallic = 0.18
+roughness = 0.82
+
+[sub_resource type="BoxMesh" id="BoxMesh_lower_bed"]
+size = Vector3(0.52, 0.07, 0.78)
+
+[sub_resource type="BoxMesh" id="BoxMesh_rim"]
+size = Vector3(0.055, 0.06, 0.76)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_tongue"]
+albedo_color = Color(0.38, 0.11, 0.14, 1)
+metallic = 0.05
+roughness = 0.45
+
+[sub_resource type="BoxMesh" id="BoxMesh_tongue"]
+size = Vector3(0.39, 0.036, 0.66)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_tooth"]
+albedo_color = Color(0.76, 0.7, 0.54, 1)
+metallic = 0.25
+roughness = 0.42
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_ltooth"]
+top_radius = 0.002
+bottom_radius = 0.018
+height = 0.068
+radial_segments = 8
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_blood"]
+albedo_color = Color(0.58, 0.16, 0.12, 1)
+metallic = 0.45
+roughness = 0.35
+
+[sub_resource type="BoxMesh" id="BoxMesh_skull"]
+size = Vector3(0.56, 0.22, 0.28)
+
+[sub_resource type="BoxMesh" id="BoxMesh_snout"]
+size = Vector3(0.5, 0.11, 0.68)
+
+[sub_resource type="BoxMesh" id="BoxMesh_ridge"]
+size = Vector3(0.32, 0.04, 0.07)
+
+[sub_resource type="BoxMesh" id="BoxMesh_blade"]
+size = Vector3(0.42, 0.075, 0.015)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_utooth"]
+top_radius = 0.02
+bottom_radius = 0.002
+height = 0.085
+radial_segments = 8
+
+[sub_resource type="BoxMesh" id="BoxMesh_socket"]
+size = Vector3(0.11, 0.09, 0.14)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_eye"]
+resource_local_to_scene = true
+albedo_color = Color(1, 0.12, 0.05, 1)
+emission_enabled = true
+emission = Color(1, 0.08, 0.02, 1)
+emission_energy_multiplier = 2.4
+
+[sub_resource type="SphereMesh" id="SphereMesh_eye"]
+radius = 0.032
+height = 0.064
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_blood_drop"]
+albedo_color = Color(0.55, 0.02, 0.02, 1)
+roughness = 0.2
+
+[sub_resource type="SphereMesh" id="SphereMesh_blood_drop"]
+material = SubResource("StandardMaterial3D_blood_drop")
+radius = 0.016
+height = 0.032
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_skin"]
+albedo_color = Color(0.68, 0.5, 0.42, 1)
+roughness = 0.75
+
+[sub_resource type="BoxMesh" id="BoxMesh_severed_palm"]
+size = Vector3(0.09, 0.03, 0.11)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_severed_wrist"]
+top_radius = 0.032
+bottom_radius = 0.032
+height = 0.04
+
+[node name="MaquinaCocodrilo" type="Node3D" unique_id=1490336432]
+script = ExtResource("1_cm")
+
+[node name="PlacaBase" type="MeshInstance3D" parent="." unique_id=1866960169]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0225, 0.05)
+material_override = SubResource("StandardMaterial3D_iron")
+mesh = SubResource("BoxMesh_base")
+
+[node name="MandibulaInferior" type="Node3D" parent="." unique_id=803116242]
+
+[node name="BaseMandibula" type="MeshInstance3D" parent="MandibulaInferior" unique_id=533239816]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.07, 0.06)
+material_override = SubResource("StandardMaterial3D_croc")
+mesh = SubResource("BoxMesh_lower_bed")
+
+[node name="BordeIzquierdo" type="MeshInstance3D" parent="MandibulaInferior" unique_id=1659124921]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.235, 0.115, 0.06)
+material_override = SubResource("StandardMaterial3D_croc")
+mesh = SubResource("BoxMesh_rim")
+
+[node name="BordeDerecho" type="MeshInstance3D" parent="MandibulaInferior" unique_id=1173240770]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.235, 0.115, 0.06)
+material_override = SubResource("StandardMaterial3D_croc")
+mesh = SubResource("BoxMesh_rim")
+
+[node name="Lengua" type="MeshInstance3D" parent="MandibulaInferior" unique_id=564462914]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.112, 0.07)
+material_override = SubResource("StandardMaterial3D_tongue")
+mesh = SubResource("BoxMesh_tongue")
+
+[node name="DientesInferiores" type="Node3D" parent="MandibulaInferior" unique_id=586636943]
+
+[node name="DienteInf_Izq1" type="MeshInstance3D" parent="MandibulaInferior/DientesInferiores" unique_id=1862835081]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.23, 0.165, -0.18)
+material_override = SubResource("StandardMaterial3D_tooth")
+mesh = SubResource("CylinderMesh_ltooth")
+
+[node name="DienteInf_Izq2" type="MeshInstance3D" parent="MandibulaInferior/DientesInferiores" unique_id=1904511994]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.23, 0.165, -0.02)
+material_override = SubResource("StandardMaterial3D_blood")
+mesh = SubResource("CylinderMesh_ltooth")
+
+[node name="DienteInf_Izq3" type="MeshInstance3D" parent="MandibulaInferior/DientesInferiores" unique_id=616247835]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.23, 0.165, 0.14)
+material_override = SubResource("StandardMaterial3D_tooth")
+mesh = SubResource("CylinderMesh_ltooth")
+
+[node name="DienteInf_Izq4" type="MeshInstance3D" parent="MandibulaInferior/DientesInferiores" unique_id=1560118390]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.23, 0.165, 0.3)
+material_override = SubResource("StandardMaterial3D_blood")
+mesh = SubResource("CylinderMesh_ltooth")
+
+[node name="DienteInf_Der1" type="MeshInstance3D" parent="MandibulaInferior/DientesInferiores" unique_id=1005110637]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.23, 0.165, -0.18)
+material_override = SubResource("StandardMaterial3D_tooth")
+mesh = SubResource("CylinderMesh_ltooth")
+
+[node name="DienteInf_Der2" type="MeshInstance3D" parent="MandibulaInferior/DientesInferiores" unique_id=847701853]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.23, 0.165, -0.02)
+material_override = SubResource("StandardMaterial3D_blood")
+mesh = SubResource("CylinderMesh_ltooth")
+
+[node name="DienteInf_Der3" type="MeshInstance3D" parent="MandibulaInferior/DientesInferiores" unique_id=1340593012]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.23, 0.165, 0.14)
+material_override = SubResource("StandardMaterial3D_tooth")
+mesh = SubResource("CylinderMesh_ltooth")
+
+[node name="DienteInf_Der4" type="MeshInstance3D" parent="MandibulaInferior/DientesInferiores" unique_id=535414552]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.23, 0.165, 0.3)
+material_override = SubResource("StandardMaterial3D_blood")
+mesh = SubResource("CylinderMesh_ltooth")
+
+[node name="DienteInf_Frente1" type="MeshInstance3D" parent="MandibulaInferior/DientesInferiores" unique_id=966807053]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.14, 0.165, 0.43)
+material_override = SubResource("StandardMaterial3D_tooth")
+mesh = SubResource("CylinderMesh_ltooth")
+
+[node name="DienteInf_Frente2" type="MeshInstance3D" parent="MandibulaInferior/DientesInferiores" unique_id=184065680]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.165, 0.43)
+material_override = SubResource("StandardMaterial3D_blood")
+mesh = SubResource("CylinderMesh_ltooth")
+
+[node name="DienteInf_Frente3" type="MeshInstance3D" parent="MandibulaInferior/DientesInferiores" unique_id=1596387905]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.14, 0.165, 0.43)
+material_override = SubResource("StandardMaterial3D_tooth")
+mesh = SubResource("CylinderMesh_ltooth")
+
+[node name="BotonesLengua" type="Node3D" parent="MandibulaInferior" unique_id=1795437516]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.128, 0.07)
+
+[node name="Boton_01" parent="MandibulaInferior/BotonesLengua" unique_id=825458530 instance=ExtResource("2_tb")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.129, 0, -0.236)
+
+[node name="Boton_02" parent="MandibulaInferior/BotonesLengua" unique_id=243400822 instance=ExtResource("2_tb")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.043, 0, -0.236)
+indice_boton = 1
+
+[node name="Boton_03" parent="MandibulaInferior/BotonesLengua" unique_id=673965450 instance=ExtResource("2_tb")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.043, 0, -0.236)
+indice_boton = 2
+
+[node name="Boton_04" parent="MandibulaInferior/BotonesLengua" unique_id=792678955 instance=ExtResource("2_tb")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.129, 0, -0.236)
+indice_boton = 3
+
+[node name="Boton_05" parent="MandibulaInferior/BotonesLengua" unique_id=1800567479 instance=ExtResource("2_tb")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.129, 0, -0.118)
+indice_boton = 4
+
+[node name="Boton_06" parent="MandibulaInferior/BotonesLengua" unique_id=964310045 instance=ExtResource("2_tb")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.043, 0, -0.118)
+indice_boton = 5
+
+[node name="Boton_07" parent="MandibulaInferior/BotonesLengua" unique_id=1597420460 instance=ExtResource("2_tb")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.043, 0, -0.118)
+indice_boton = 6
+
+[node name="Boton_08" parent="MandibulaInferior/BotonesLengua" unique_id=1712630526 instance=ExtResource("2_tb")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.129, 0, -0.118)
+indice_boton = 7
+
+[node name="Boton_09" parent="MandibulaInferior/BotonesLengua" unique_id=1958118654 instance=ExtResource("2_tb")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.129, 0, 0)
+indice_boton = 8
+
+[node name="Boton_10" parent="MandibulaInferior/BotonesLengua" unique_id=940694518 instance=ExtResource("2_tb")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.043, 0, 0)
+indice_boton = 9
+
+[node name="Boton_11" parent="MandibulaInferior/BotonesLengua" unique_id=2019666463 instance=ExtResource("2_tb")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.043, 0, 0)
+indice_boton = 10
+
+[node name="Boton_12" parent="MandibulaInferior/BotonesLengua" unique_id=143148950 instance=ExtResource("2_tb")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.129, 0, 0)
+indice_boton = 11
+
+[node name="Boton_13" parent="MandibulaInferior/BotonesLengua" unique_id=1402474735 instance=ExtResource("2_tb")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.129, 0, 0.118)
+indice_boton = 12
+
+[node name="Boton_14" parent="MandibulaInferior/BotonesLengua" unique_id=1775145492 instance=ExtResource("2_tb")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.043, 0, 0.118)
+indice_boton = 13
+
+[node name="Boton_15" parent="MandibulaInferior/BotonesLengua" unique_id=2018007552 instance=ExtResource("2_tb")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.043, 0, 0.118)
+indice_boton = 14
+
+[node name="Boton_16" parent="MandibulaInferior/BotonesLengua" unique_id=1715705473 instance=ExtResource("2_tb")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.129, 0, 0.118)
+indice_boton = 15
+
+[node name="Boton_17" parent="MandibulaInferior/BotonesLengua" unique_id=1801089562 instance=ExtResource("2_tb")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.129, 0, 0.236)
+indice_boton = 16
+
+[node name="Boton_18" parent="MandibulaInferior/BotonesLengua" unique_id=1714471890 instance=ExtResource("2_tb")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.043, 0, 0.236)
+indice_boton = 17
+
+[node name="Boton_19" parent="MandibulaInferior/BotonesLengua" unique_id=1919060202 instance=ExtResource("2_tb")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.043, 0, 0.236)
+indice_boton = 18
+
+[node name="Boton_20" parent="MandibulaInferior/BotonesLengua" unique_id=213834515 instance=ExtResource("2_tb")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.129, 0, 0.236)
+indice_boton = 19
+
+[node name="LuzBoca" type="OmniLight3D" parent="." unique_id=1689969341]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.34, 0.12)
+light_color = Color(1, 0.36, 0.22, 1)
+light_energy = 0.95
+omni_range = 1.35
+
+[node name="MandibulaSuperior" type="Node3D" parent="." unique_id=1030264]
+transform = Transform3D(1, 0, 0, 0, 0.587785, 0.809017, 0, -0.809017, 0.587785, 0, 0.16, -0.32)
+script = ExtResource("3_ms")
+
+[node name="CraneoTrasero" type="MeshInstance3D" parent="MandibulaSuperior" unique_id=876881159]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.09, 0.06)
+material_override = SubResource("StandardMaterial3D_croc")
+mesh = SubResource("BoxMesh_skull")
+
+[node name="HocicoSuperior" type="MeshInstance3D" parent="MandibulaSuperior" unique_id=1608494897]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.06, 0.44)
+material_override = SubResource("StandardMaterial3D_croc")
+mesh = SubResource("BoxMesh_snout")
+
+[node name="Cresta1" type="MeshInstance3D" parent="MandibulaSuperior" unique_id=1605907699]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.13, 0.24)
+material_override = SubResource("StandardMaterial3D_iron")
+mesh = SubResource("BoxMesh_ridge")
+
+[node name="Cresta2" type="MeshInstance3D" parent="MandibulaSuperior" unique_id=790708484]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.13, 0.44)
+material_override = SubResource("StandardMaterial3D_iron")
+mesh = SubResource("BoxMesh_ridge")
+
+[node name="Cresta3" type="MeshInstance3D" parent="MandibulaSuperior" unique_id=2003284986]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.13, 0.64)
+material_override = SubResource("StandardMaterial3D_iron")
+mesh = SubResource("BoxMesh_ridge")
+
+[node name="CuchillaGuillotina" type="MeshInstance3D" parent="MandibulaSuperior" unique_id=73478899]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.02, 0.52)
+material_override = SubResource("StandardMaterial3D_blood")
+mesh = SubResource("BoxMesh_blade")
+
+[node name="DientesSuperiores" type="Node3D" parent="MandibulaSuperior" unique_id=1563455502]
+
+[node name="DienteSup_Izq1" type="MeshInstance3D" parent="MandibulaSuperior/DientesSuperiores" unique_id=887502543]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.22, -0.032, 0.2)
+material_override = SubResource("StandardMaterial3D_tooth")
+mesh = SubResource("CylinderMesh_utooth")
+
+[node name="DienteSup_Izq2" type="MeshInstance3D" parent="MandibulaSuperior/DientesSuperiores" unique_id=189303472]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.22, -0.032, 0.38)
+material_override = SubResource("StandardMaterial3D_blood")
+mesh = SubResource("CylinderMesh_utooth")
+
+[node name="DienteSup_Izq3" type="MeshInstance3D" parent="MandibulaSuperior/DientesSuperiores" unique_id=389821373]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.22, -0.032, 0.56)
+material_override = SubResource("StandardMaterial3D_tooth")
+mesh = SubResource("CylinderMesh_utooth")
+
+[node name="DienteSup_Izq4" type="MeshInstance3D" parent="MandibulaSuperior/DientesSuperiores" unique_id=915290309]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.22, -0.032, 0.72)
+material_override = SubResource("StandardMaterial3D_blood")
+mesh = SubResource("CylinderMesh_utooth")
+
+[node name="DienteSup_Der1" type="MeshInstance3D" parent="MandibulaSuperior/DientesSuperiores" unique_id=269713358]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.22, -0.032, 0.2)
+material_override = SubResource("StandardMaterial3D_tooth")
+mesh = SubResource("CylinderMesh_utooth")
+
+[node name="DienteSup_Der2" type="MeshInstance3D" parent="MandibulaSuperior/DientesSuperiores" unique_id=1187833915]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.22, -0.032, 0.38)
+material_override = SubResource("StandardMaterial3D_blood")
+mesh = SubResource("CylinderMesh_utooth")
+
+[node name="DienteSup_Der3" type="MeshInstance3D" parent="MandibulaSuperior/DientesSuperiores" unique_id=453863083]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.22, -0.032, 0.56)
+material_override = SubResource("StandardMaterial3D_tooth")
+mesh = SubResource("CylinderMesh_utooth")
+
+[node name="DienteSup_Der4" type="MeshInstance3D" parent="MandibulaSuperior/DientesSuperiores" unique_id=1175755948]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.22, -0.032, 0.72)
+material_override = SubResource("StandardMaterial3D_blood")
+mesh = SubResource("CylinderMesh_utooth")
+
+[node name="DienteSup_Frente1" type="MeshInstance3D" parent="MandibulaSuperior/DientesSuperiores" unique_id=1387451365]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.14, -0.035, 0.76)
+material_override = SubResource("StandardMaterial3D_blood")
+mesh = SubResource("CylinderMesh_utooth")
+
+[node name="DienteSup_Frente2" type="MeshInstance3D" parent="MandibulaSuperior/DientesSuperiores" unique_id=35134167]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.035, 0.76)
+material_override = SubResource("StandardMaterial3D_blood")
+mesh = SubResource("CylinderMesh_utooth")
+
+[node name="DienteSup_Frente3" type="MeshInstance3D" parent="MandibulaSuperior/DientesSuperiores" unique_id=967817869]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.14, -0.035, 0.76)
+material_override = SubResource("StandardMaterial3D_blood")
+mesh = SubResource("CylinderMesh_utooth")
+
+[node name="CuencaOjoIzquierdo" type="MeshInstance3D" parent="MandibulaSuperior" unique_id=644547093]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.18, 0.21, 0.14)
+material_override = SubResource("StandardMaterial3D_iron")
+mesh = SubResource("BoxMesh_socket")
+
+[node name="CuencaOjoDerecho" type="MeshInstance3D" parent="MandibulaSuperior" unique_id=2040351360]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.18, 0.21, 0.14)
+material_override = SubResource("StandardMaterial3D_iron")
+mesh = SubResource("BoxMesh_socket")
+
+[node name="OjoIzquierdo" type="MeshInstance3D" parent="MandibulaSuperior" unique_id=908044508]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.18, 0.21, 0.19)
+material_override = SubResource("StandardMaterial3D_eye")
+mesh = SubResource("SphereMesh_eye")
+
+[node name="OjoDerecho" type="MeshInstance3D" parent="MandibulaSuperior" unique_id=155806922]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.18, 0.21, 0.19)
+material_override = SubResource("StandardMaterial3D_eye")
+mesh = SubResource("SphereMesh_eye")
+
+[node name="ParticulasSangre" type="CPUParticles3D" parent="." unique_id=1792792570]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.18, 0.18)
+emitting = false
+amount = 75
+lifetime = 0.85
+one_shot = true
+explosiveness = 0.92
+mesh = SubResource("SphereMesh_blood_drop")
+direction = Vector3(0, 0.7, 0.4)
+spread = 65.0
+initial_velocity_min = 1.4
+initial_velocity_max = 3.8
+
+[node name="ManoCortada" type="Node3D" parent="." unique_id=1576267321]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.155, 0.24)
+visible = false
+
+[node name="Palma" type="MeshInstance3D" parent="ManoCortada" unique_id=307501237]
+material_override = SubResource("StandardMaterial3D_skin")
+mesh = SubResource("BoxMesh_severed_palm")
+
+[node name="CorteMuneca" type="MeshInstance3D" parent="ManoCortada" unique_id=1256138872]
+transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, 0, 0, 0.065)
+material_override = SubResource("StandardMaterial3D_blood")
+mesh = SubResource("CylinderMesh_severed_wrist")

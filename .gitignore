@@ -1,0 +1,7 @@
+# Godot 4+ specific ignores
+.godot/
+/android/
+
+# Archivos de video pesados
+*.avi
+*.mp4
